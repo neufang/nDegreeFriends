@@ -44,3 +44,10 @@ Average case: Let average number of friends of a user is K,  line 23-29 run O(K^
 So the time complexity is O(K^2*M/K ) ~= O(MK).
 
 `friends_reducer.py`: its complexity is linear to the number of line of its input.
+
+Discussion
+-----------
+The main concern of the method is that the degree between two users can be caculated severy times during the iteration
+of `friends_linker.py`.  
+
+*to be continue*
