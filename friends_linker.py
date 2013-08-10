@@ -2,7 +2,7 @@ import sys
 from collections import defaultdict
 current_user = None
 connection_dict = dict()
-dgr=None
+
 # input comes from STDIN
 for line in sys.stdin:
     # remove leading and trailing whitespace
@@ -23,13 +23,12 @@ for line in sys.stdin:
         for people in connection_dict:
             # set the degree of new pair of N-degree friends (n_i, n_j)
             # Degree(n_i,n_j)= Degree(n_i, user) + Degree(user, n_j)
-            updated_degree = dgr + connection_dict[people]
+            updated_degree = degree + connection_dict[people]
 
             print "%s\t%s\t%d" %(friend, people,updated_degree )
             print "%s\t%s\t%d" %(people,friend,updated_degree )
 
     else:
-        dgr=degree
         current_user = user
         connection_dict.clear()
 
