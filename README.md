@@ -43,4 +43,4 @@ the space complexity is O(M^2).
 Average case: Let average number of friends of a user is K,  line 23-29 run O(K^2). 
 So the time complexity is O(K^2*M/K ) ~= O(MK).
 
-`friends_reducer.py`: its complexity is linear to the line of its input.
+`friends_reducer.py`: its complexity is linear to the number of line of its input.
