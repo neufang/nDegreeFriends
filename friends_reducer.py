@@ -1,7 +1,10 @@
 import sys
 
 #global variable to control the degree of friends
-N=2
+try:
+    N= int(sys.argv[1])
+except:
+    N=2
 
 current_user = None
 current_set = set()
