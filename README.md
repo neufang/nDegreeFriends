@@ -12,7 +12,7 @@ Execution
 **$N** is degree of friends
 
 `cat input_file | python friends_mapper.py | sort -k1,1 | python friends_linker.py | sort -k1,1 |`
-`uniq | python friends_reducer.py  $N`
+`python uniq.py | python friends_reducer.py  $N`
 
 For large **N**, multiple run of friends_linker.py is needed.
 
@@ -45,9 +45,4 @@ So the time complexity is O(K^2*M/K ) ~= O(MK).
 
 `friends_reducer.py`: its complexity is linear to the number of line of its input.
 
-Discussion
------------
-The main concern of the method is that the degree between two users can be caculated severy times during the iteration
-of `friends_linker.py`.  
 
-*to be continue*
