@@ -17,7 +17,7 @@ for line in sys.stdin:
     print line
     # this IF-switch only works because Hadoop sorts map output
     # by key (here: word) before it is passed to the reducer
-    # two users if they share a identical friend are paired up, so they are considered as (N+1)-degree friends 
+    # two users if they share a identical friend are paired up, they degree of friends is updated
     if current_user == user:
 
         for people in connection_dict:
