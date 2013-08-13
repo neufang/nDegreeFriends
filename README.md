@@ -1,6 +1,6 @@
 nDegreeFriends
 ==============
-Preliminary Solution to  SoundCloud Data Challenge
+Preliminary Solution to  SoundCloud Data Challenge following the idea of hadoop streaming
 
 https://gist.github.com/omidaladini/42ab4f7d058984da9d0f
 
@@ -11,16 +11,11 @@ Execution
 -------
 **$N** is degree of friends
 
-`cat input_file | python friends_mapper.py | sort -k1,1 | python friends_linker.py | sort -k1,1 |`
-`python uniq.py | python friends_reducer.py  $N`
+ `cat input_file | python friends_mapper.py | sort -k1,1 | python friends_linker.py | sort -k1,1 |`
+ `python uniq.py | python friends_reducer.py  $N`
 
 For large **N**, multiple run of friends_linker.py is needed.
 
-Attention
--------
-Follow the idea of hadoop streaming
-
-`toy solution, no function, no opp`
 
 Complexity Analysis
 ------
@@ -44,7 +39,7 @@ Complexity Analysis
 
 Discussion
 ------
-The initition of the methods: 
+The motivation: 
 - *Transitive Relation*: Given a user A, if B is a n-degree friend of A, C is a m-degree friend of A, then B and C are (m+n)-degree friends,
 mutually.
 - *Shortest Path*: If there exists several paths of connecting user B and C, the min path is chosen as the final friend-degree between them.
@@ -80,7 +75,7 @@ of friends in any degree with `friends_linker.py`, e.g., using friends of `david
 
 `friends_linker.py` also keep the original record from input. After running 
 
-`cat input_file | python friends_mapper.py | sort -k1,1 | python friends_linker.py | sort -k1,1`
+ $ cat input_file | python friends_mapper.py | sort -k1,1 | python friends_linker.py | sort -k1,1
 
 we get following results,
 
@@ -93,6 +88,7 @@ davidbowie      mick    2
 davidbowie      omid    1
 davidbowie      torsten 2
 davidbowie      torsten 2
+...
 ```
 
 Notice the duplcate pairs of `davidbowie  torsten`, as they have mutually friends `kim` and `omid`. 
@@ -101,7 +97,7 @@ Those identical pairs shall be removed to save running time of following steps.
 One more run of `python friends_linker.py` produce friends with degree <= 4. ( **n runs of `friends_linker.py` generate
 degree of 2^n at most.**)
 
-In the result we notice that
+We notice the following result snippet:
 
 ```
 brendan kim     2
