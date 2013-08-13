@@ -72,7 +72,7 @@ torsten kim     1
 torsten omid    1
 ....
 ```
-We can see record on friends of one use are aggregated together, then following the *Transitive Relation*, we can build pairs
+We can see the friends of one user are aggregated. Then following the *Transitive Relation*, we can build pairs
 of friends in any degree with `friends_linker.py`. (Regarding [Six degrees of separation](http://en.wikipedia.org/wiki/Six_degrees_of_separation), intensive
 running of the friend-matching is not necessary.)
 
@@ -114,7 +114,7 @@ Therefore, `uniq.py` is introduced to merge duplicate pair and keep the first re
 has the smallest degree after sorting.
 
 
-The following scripts of caculating friends of degree 3 can evaluate the contribution of `uniq.py`. The results give
+The following scripts of caculating friends of degree 3 can simply evaluate the contribution of `uniq.py`. The results give
 the overall number of friend pairs.
 
 `source drg3.sh input_file | wc -l` 
@@ -122,7 +122,7 @@ the overall number of friend pairs.
 `source drg3_uniq.sh input_file | wc -l`
 
 Using the example input file, they generate **148** and **40** friend pairs seperately. `uniq.py` makes the procedure more efficiently, as 
-redundant updating of degree of friends can be avoided. The improvement is epecially significant for mutiple calcuation and big data.
+redundant updating degrees of friends can be avoided. The improvement is epecially significant for mutiple calcuation and big data.
 
 Eventually `friends_reducer.py` filters the degree bigger than **N** and formats the output as required.
 
