@@ -14,7 +14,7 @@ Execution
  `cat input_file | python friends_mapper.py | sort -k1,1 | python friends_linker.py | sort -k1,1 |`
  `python uniq.py | python friends_reducer.py  $N`
 
-For large **N**, multiple run of friends_linker.py is needed.
+For large **N**, multiple interation of the linking is needed.
 
 
 Complexity Analysis
@@ -42,7 +42,7 @@ Discussion
 The motivation: 
 - *Transitive Relation*: Given a user A, if B is a n-degree friend of A, C is a m-degree friend of A, then B and C are (m+n)-degree friends,
 mutually.
-- *Shortest Path*: If there exists several paths of connecting user B and C, the min path is chosen as the final friend-degree between them.
+- *Shortest Path*: If there exists several paths of connecting user B and C, the length of a shortest path is chosen as the final friend-degree between them.
 
 Following those ideas, initially `friends_mapper.py` emit all friend pairs and the degrees ( =1 as they are directly connected).
 
