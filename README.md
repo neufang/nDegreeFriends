@@ -22,9 +22,6 @@ Follow the idea of hadoop streaming
 
 `toy solution, no function, no opp`
 
-redundant updating of degree of friends can be avoided.
-
-
 Complexity Analysis
 ------
 
@@ -52,7 +49,7 @@ The initition of the methods:
 mutually.
 - *Shortest Path*: If there exists several paths of connecting user B and C, the min path is chosen as the final friend-degree between them.
 
-Following those ideas, initially `friends_mapper.py` emit all friend pairs and the degrees (=1 as they are directly connected).
+Following those ideas, initially `friends_mapper.py` emit all friend pairs and the degrees ( =1 as they are directly connected).
 
 ```
 davidbowie      omid    1
@@ -99,7 +96,10 @@ davidbowie      torsten 2
 Notice the duplcate pairs of `davidbowie  torsten`, as they have mutually friends `kim` and `omid`. 
 Those identical pairs shall be removed to save running time of following steps.
 
-One more run of `python friends_linker.py` produce friends of degree 3. In the result we notice that
+One more run of `python friends_linker.py` produce friends with degree <= 4. ( **n runs of `friends_linker.py` generate
+degree of 2^n at most.**)
+
+In the result we notice that
 
 ```
 brendan kim     2
@@ -113,7 +113,16 @@ Following the rule of *Shortest Path*, only the shortest path 2 between `brendan
 Therefore, `uniq.py` is introduced to merge duplicate pair and keep the first record of a unique pair, which
 has the smallest degree after sorting.
 
-run 
 
+The following scripts of caculating friends of degree 3 can evaluate the contribution of `uniq.py`. The results give
+the overall number of friend pairs.
 
+`source drg3.sh input_file | wc -l` 
+
+`source drg3_uniq.sh input_file | wc -l`
+
+Using the example input file, they generate **148** and **40** friend pairs seperately. `uniq.py` makes the procedure more efficiently, as 
+redundant updating of degree of friends can be avoided. The improvement is epecially significant for mutiple calcuation and big data.
+
+Eventually `friends_reducer.py` filters the degree bigger than **N** and formats the output as required.
 
