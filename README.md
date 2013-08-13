@@ -45,3 +45,75 @@ Complexity Analysis
 - `friends_reducer.py`: its complexity is linear to the number of line of its input.
 
 
+Discussion
+------
+The initition of the methods: 
+- *Transitive Relation*: Given a user A, if B is a n-degree friend of A, C is a m-degree friend of A, then B and C are (m+n)-degree friends,
+mutually.
+- *Shortest Path*: If there exists several paths of connecting user B and C, the min path is chosen as the final friend-degree between them.
+
+Following those ideas, initially `friends_mapper.py` emit all friend pairs and the degrees (=1 as they are directly connected).
+
+```
+davidbowie      omid    1
+omid    davidbowie      1
+davidbowie      kim     1
+kim     davidbowie      1
+kim     torsten 1
+torsten kim     1
+...
+```
+
+After sorting on the first column,
+```
+davidbowie      omid    1
+omid    davidbowie      1
+davidbowie      kim     1
+kim     davidbowie      1
+kim     torsten 1
+torsten kim     1
+torsten omid    1
+....
+```
+We can see record on friends of one use are aggregated together, then following the *Transitive Relation*, we can build pairs
+of friends in any degree with `friends_linker.py`. (Regarding [Six degrees of separation](http://en.wikipedia.org/wiki/Six_degrees_of_separation), intensive
+running of the friend-matching is not necessary.)
+
+`friends_linker.py` also keep the original record from input. After running 
+
+`cat input_file | python friends_mapper.py | sort -k1,1 | python friends_linker.py | sort -k1,1`
+
+we get following results,
+
+```
+brendan kim     2
+brendan omid    2
+brendan torsten 1
+davidbowie      kim     1
+davidbowie      mick    2
+davidbowie      omid    1
+davidbowie      torsten 2
+davidbowie      torsten 2
+```
+
+Notice the duplcate pairs of `davidbowie  torsten`, as they have mutually friends `kim` and `omid`. 
+Those identical pairs shall be removed to save running time of following steps.
+
+One more run of `python friends_linker.py` produce friends of degree 3. In the result we notice that
+
+```
+brendan kim     2
+brendan kim     2
+brendan kim     4
+brendan kim     4
+```
+
+Following the rule of *Shortest Path*, only the shortest path 2 between `brendan` and  `kim` is kept. 
+
+Therefore, `uniq.py` is introduced to merge duplicate pair and keep the first record of a unique pair, which
+has the smallest degree after sorting.
+
+run 
+
+
+
