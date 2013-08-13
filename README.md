@@ -63,17 +63,20 @@ torsten kim     1
 
 After sorting on the first column,
 ```
-davidbowie      omid    1
-omid    davidbowie      1
 davidbowie      kim     1
+davidbowie      omid    1
+davidbowie      ziggy   1
 kim     davidbowie      1
 kim     torsten 1
-torsten kim     1
-torsten omid    1
+mick    ziggy   1
+omid    davidbowie      1
+omid    torsten 1
 ....
 ```
 We can see the friends of one user are aggregated. Then following the *Transitive Relation*, we can build pairs
-of friends in any degree with `friends_linker.py`.
+of friends in any degree with `friends_linker.py`, e.g., using friends of `davidbowie`, we can build new pairs `kim omid`,
+`kim, ziggy`,`omid, ziggy`. Given **K** as the number of friends, the pairing procedure takes **K(K-1)/2** steps.
+
 
 `friends_linker.py` also keep the original record from input. After running 
 
