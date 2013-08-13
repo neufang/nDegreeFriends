@@ -73,8 +73,7 @@ torsten omid    1
 ....
 ```
 We can see the friends of one user are aggregated. Then following the *Transitive Relation*, we can build pairs
-of friends in any degree with `friends_linker.py`. (Regarding [Six degrees of separation](http://en.wikipedia.org/wiki/Six_degrees_of_separation), intensive
-running of the friend-matching is not necessary.)
+of friends in any degree with `friends_linker.py`.
 
 `friends_linker.py` also keep the original record from input. After running 
 
@@ -125,4 +124,9 @@ Using the example input file, they generate **148** and **40** friend pairs sepe
 redundant updating degrees of friends can be avoided. The improvement is epecially significant for mutiple calcuation and big data.
 
 Eventually `friends_reducer.py` filters the degree bigger than **N** and formats the output as required.
+
+Regarding [Six degrees of separation](http://en.wikipedia.org/wiki/Six_degrees_of_separation), intensive
+running of the friend-matching is not necessary.
+
+Given **N**, the time of running `friends_linker.py` is *ceiling(sqrt(N))*.
 
